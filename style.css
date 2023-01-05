@@ -33,8 +33,6 @@ body{
     border-radius: 5px;
     border-color: rgb(68, 71, 90);
     background-color: rgb(98, 114, 164);
-
-
     margin: 15px;
 }
 
@@ -58,6 +56,28 @@ body{
     margin-right: 7px;
     margin-bottom: 15px;
 }
+
+
+#equalRow{
+    margin-left: auto;
+    display: flex;
+}
+
+#logos{
+    display: flex;
+}
+
+#calculatorLogo {
+    height: 80px;
+    margin-right: -7px;
+}
+
+#equal {
+    min-width: 160px;
+    margin-right: 40px;
+    background-color: rgb(241, 250, 140);
+}
+
 
 .number{
     background-color: rgb(255, 184, 108);
