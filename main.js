@@ -77,7 +77,7 @@ let resetRequest = false;
 const numbersDOM = document.querySelectorAll(".number");
 numbersDOM.forEach((button) => {
     button.addEventListener('click', (e) => {
-        currentNumber += convertNumber(e.path[0].id);
+        currentNumber += convertNumber(e.target.id);
     })
 })
 
@@ -87,7 +87,7 @@ operandsDOM.forEach((button) => {
         if(operator !== ''){
             oldOperator = operator
         }
-        operator = e.path[0].id;
+        operator = e.target.id;
         if(firstNumber === '' && secondNumber === ''){
             firstNumber = currentNumber;
             currentNumber = '';
