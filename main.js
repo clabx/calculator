@@ -32,10 +32,24 @@ function resetData(){
     result = "";
 }
 
+function calculate(numberA, numberB, op){
+    switch(op){
+        case 'plus':
+            return Number(numberA)+Number(numberB);
+        case 'minus':
+            return Number(numberA)-Number(numberB);
+        case 'multiply':
+            return Number(numberA)*Number(numberB);
+        case 'division':
+            return Number(numberA)/Number(numberB); 
+    }
+}
+
 let firstNumber = "";
 let currentNumber = "";
 let secondNumber = "";
 let operator = "";
+let oldOperator = "";
 let result = "";
 
 // Query selectors and listeners.
@@ -51,18 +65,31 @@ numbersDOM.forEach((button) => {
 const operandsDOM = document.querySelectorAll(".operand");
 operandsDOM.forEach((button) => {
     button.addEventListener('click', (e) => {
+        if(operator !== ''){
+            oldOperator = operator
+        }
         operator = e.path[0].id;
         if(firstNumber === '' && secondNumber === ''){
             firstNumber = currentNumber;
             currentNumber = '';
-        } else if(secondNumber === ''){
-            secondNumber = currentNumber;
-            currentNumber = '';
         } else{
-            firstNumber = operate(firstNumber, secondNumber, operator);
+            secondNumber = currentNumber;
+            firstNumber = calculate(firstNumber, secondNumber, oldOperator);
             secondNumber = '';
-        }
+            currentNumber = '';
+            }
     })
 })
 
+const equalDOM = document.querySelector('#equal');
+equalDOM.addEventListener('click', () => {
+    secondNumber = currentNumber;
+    if(firstNumber != '' && secondNumber != ''){
+        result = calculate(firstNumber, secondNumber, operator);
+        firstNumber = result;
+        secondNumber = '';
+        operator = '';
+        console.log(result)
+    }
+})
 
