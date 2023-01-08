@@ -36,6 +36,11 @@ firstNumberToShow = "";
 secondNumberToShow = "";
 }
 
+function cleanScreen(){
+    displayResultDOM.textContent = '';
+    displayEquationDOM.textContent = '';
+}
+
 function calculate(numberA, numberB, op){
     switch(op){
         case 'plus':
@@ -45,7 +50,13 @@ function calculate(numberA, numberB, op){
         case 'multiply':
             return Number(numberA)*Number(numberB);
         case 'division':
-            return Number(numberA)/Number(numberB); 
+            if(numberB != 0){
+                return Number(numberA)/Number(numberB); 
+            } else{
+                resetData();
+                cleanScreen();
+                return;
+            }
     }
 }
 
@@ -112,10 +123,12 @@ decimalDOM.addEventListener('click', () => {
 
 const equalDOM = document.querySelector('#equal');
 equalDOM.addEventListener('click', () => {
-    secondNumber = currentNumber;
-    if(firstNumber != '' && secondNumber != ''){
-        result = calculate(firstNumber, secondNumber, operator);
-    }
+    if(firstNumber != ''){
+        secondNumber = currentNumber;
+        if(firstNumber != '' && secondNumber != ''){
+            result = calculate(firstNumber, secondNumber, operator);
+        }
+    } 
 })
 
 const displayEquationDOM = document.querySelector('#displayEquation');
@@ -148,6 +161,5 @@ buttonsDOM.forEach((button) => {
 const clearDOM = document.querySelector("#clear");
 clearDOM.addEventListener('click', () => {
     resetData();
-    displayResultDOM.textContent = '';
-    displayEquationDOM.textContent = '';
+    cleanScreen();
 })
